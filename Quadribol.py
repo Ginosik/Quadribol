@@ -4,7 +4,10 @@ def randomList(sizeList , list):
     for i in range(sizeList):
         Check = True
         while Check:
-            list[i] = int(((sizeList) * random.random()) + 1)
+            print("oi")
+            var = int(((sizeList) * random.random()) + 1)
+            list.append(var)
+            list[i] = var
             for j in range(sizeList):
                 if j == i:
                     continue
@@ -16,17 +19,18 @@ def randomList(sizeList , list):
     return list
 
 """"
-    TODO: refatorar todas a lista para o limite de 16 elementos
+    TODO: refatorar codigo para utilização de append em listas, randomList não funciona dessa forma
+            refatorar randomList
 """
 
 answer = "Nada"
 custom = False
-teams = [0 for i in range(17)]
+teams = []
 timesnochamp = 4
 nExiste = True
-names1y2 = [[" ", "Mandragor", "Céu", "Salgueiro", "Farrapo", "O Trazgo", "Bjørner", "Névoa", "Hipogrifo",
+names1y2 = [["Mandragor", "Céu", "Salgueiro", "Farrapo", "O Trazgo", "Bjørner", "Névoa", "Hipogrifo",
              "Licantropo", "Fado", "Ricochete", "Relampago", "Gavião", "Mago", "Elfo", "Goblin"],
-            [" ", "Alado", "da Floresta", "Prateado", "Terrível", "de Merlin", "Negro", "Silencioso", "Ardente",
+            ["Alado", "da Floresta", "Prateado", "Terrível", "de Merlin", "Negro", "Silencioso", "Ardente",
              "Poderoso", "Verde", "Esquecido", "de Ouro", "Azul", "Feroz", "Defensivo", "Rubro"]]
 
 print('<==========Campeonato de Quadribol!==========>')
@@ -37,6 +41,12 @@ if answer == "Sim" or answer == "sim" or answer == "aham" or answer == "Aham" or
 
 if custom:
     timesnochamp = int(input(('Quantos times estarão em jogo? o máximo é 16.\n')))
+    if timesnochamp > 16:
+        print("Desculpe, o número máximo de times é 16. Vamos seguir com 16.\n")
+        timesnochamp = 16
+    if timesnochamp < 2:
+        print("Desculpe, o número mínimo de times é 2. Vamos seguir com 2.\n")
+        timesnochamp = 2
 else:
     timesnochamp = 4
 
@@ -45,10 +55,13 @@ chaves = int(timesnochamp/2)
 print('\nA quantidade de times no jogo serão: {}.\nE a quantidade de chaves vai ser: {}.\n'
       .format(timesnochamp, chaves))
 
+teams = randomList(timesnochamp, teams)
+
+'''
 for i in range(timesnochamp):
     nExiste = True
     while nExiste:
-        teams[i] = int(((timesnochamp) * random.random())+1)
+        teams[i] = int((timesnochamp) * random.random())+1
         for j in range(timesnochamp):
             if j == i:
                 continue
@@ -57,26 +70,27 @@ for i in range(timesnochamp):
         if teams[i] < 1:
             continue
         nExiste = False
+'''
 
 # Confere lista random
-#for i in range(timesnochamp):
-#    print(teams[i])
+for i in range(timesnochamp):
+    print(teams[i])
 
 
-listaUm = [0 for i in range(17)]
-listaDois = [0 for i in range(17)]
+listaUm = []
+listaDois = []
 listaUm = randomList(timesnochamp, listaUm)
 listaDois = randomList(timesnochamp, listaDois)
 
 # Confere listaUm e listaDois
 #print(listaUm)
 #print(listaDois)
+print("\n")
 
-
-nomesTimes = [0 for i in range(16)]
-for i in range(timesnochamp):
-
-    nomesTimes[i] = names1y2[0][listaUm[i]] + ' ' + names1y2[1][listaDois[i]]
+nomesTimes = []
+for i in range(timesnochamp-1):
+    print(i)
+    nomesTimes.append(names1y2[0][listaUm[i]] + ' ' + names1y2[1][listaDois[i]])
 
 aux1 = 1
 aux2 = 2
