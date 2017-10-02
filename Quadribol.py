@@ -1,26 +1,27 @@
 import random
 
-def randomList(sizeList , list):
+
+def randomList(sizeList, list):
+    auxList = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     for i in range(sizeList):
         Check = True
         while Check:
-            print("oi")
-            var = int(((sizeList) * random.random()) + 1)
-            list.append(var)
-            list[i] = var
+            auxList[i] = int(((sizeList) * random.random()) + 1)
             for j in range(sizeList):
                 if j == i:
                     continue
-                if list[i] == list[j]:
-                    list[i] = 0
-            if list[i] < 1:
+                if auxList[i] == auxList[j]:
+                    auxList[i] = 0
+            if auxList[i] < 1:
                 continue
             Check = False
+    auxList.remove(0)
+    list = auxList
     return list
 
+
 """"
-    TODO: refatorar codigo para utilização de append em listas, randomList não funciona dessa forma
-            refatorar randomList
+    TODO: resolver for que põe elementos na lista: nomesTimes
 """
 
 answer = "Nada"
@@ -50,7 +51,7 @@ if custom:
 else:
     timesnochamp = 4
 
-chaves = int(timesnochamp/2)
+chaves = int(timesnochamp / 2)
 
 print('\nA quantidade de times no jogo serão: {}.\nE a quantidade de chaves vai ser: {}.\n'
       .format(timesnochamp, chaves))
@@ -58,24 +59,10 @@ print('\nA quantidade de times no jogo serão: {}.\nE a quantidade de chaves vai
 teams = randomList(timesnochamp, teams)
 
 '''
-for i in range(timesnochamp):
-    nExiste = True
-    while nExiste:
-        teams[i] = int((timesnochamp) * random.random())+1
-        for j in range(timesnochamp):
-            if j == i:
-                continue
-            if teams[i] == teams[j]:
-                teams[i] = 0
-        if teams[i] < 1:
-            continue
-        nExiste = False
-'''
-
 # Confere lista random
 for i in range(timesnochamp):
     print(teams[i])
-
+'''
 
 listaUm = []
 listaDois = []
@@ -83,32 +70,22 @@ listaUm = randomList(timesnochamp, listaUm)
 listaDois = randomList(timesnochamp, listaDois)
 
 # Confere listaUm e listaDois
-#print(listaUm)
-#print(listaDois)
+# print(listaUm)
+# print(listaDois)
 print("\n")
 
 nomesTimes = []
-for i in range(timesnochamp-1):
-    print(i)
-    nomesTimes.append(names1y2[0][listaUm[i]] + ' ' + names1y2[1][listaDois[i]])
+nomesTimes = randomList(timesnochamp, nomesTimes)
+print(nomesTimes, "\n")
 
-aux1 = 1
-aux2 = 2
+for i in range(timesnochamp):
+    print(i)
+    nomesTimes[i] = names1y2[0][listaUm[i]] + ' ' + names1y2[1][listaDois[i]]
+
+aux1 = 0
+aux2 = 1
 
 for i in range(chaves):
     print('            /\'- {}\nChave x <=={{\n            \.- {}\n\n'.format(nomesTimes[aux1], nomesTimes[aux2]))
     aux1 += 2
     aux2 += 2
-
-
-
-
-
-
-
-
-
-
-
-
-
