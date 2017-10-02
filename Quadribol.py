@@ -21,7 +21,7 @@ def randomList(sizeList, list):
 
 
 """"
-    TODO: resolver for que põe elementos na lista: nomesTimes
+    TODO: elaborar resolução do campeonato
 """
 
 answer = "Nada"
@@ -76,11 +76,9 @@ print("\n")
 
 nomesTimes = []
 nomesTimes = randomList(timesnochamp, nomesTimes)
-print(nomesTimes, "\n")
 
 for i in range(timesnochamp):
-    print(i)
-    nomesTimes[i] = names1y2[0][listaUm[i]] + ' ' + names1y2[1][listaDois[i]]
+    nomesTimes[i] = names1y2[0][listaUm[i]-1] + ' ' + names1y2[1][listaDois[i]-1]
 
 aux1 = 0
 aux2 = 1
