@@ -1,7 +1,7 @@
 import random
 
 
-def randomList(sizeList, list):
+def randomList(sizeList):
     auxList = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     for i in range(sizeList):
         Check = True
@@ -16,29 +16,35 @@ def randomList(sizeList, list):
                 continue
             Check = False
     auxList.remove(0)
-    list = auxList
-    return list
+    return auxList
 
+def introQuadribol():
+    bResp = False
+    print('<==========Campeonato de Quadribol!==========>')
+    strResp = input('Você quer customizar o jogo escolhendo times e etc?\n')
+
+    if strResp == "Sim" or answer == "sim" or answer == "aham" or answer == "Aham" or answer == "claro" or answer == "Claro":
+        bResp = True
+
+    return bResp
 
 """"
     TODO: elaborar resolução do campeonato
+            ->transformar particulas em funções
+                ->corrigir bug no introQuadribol
 """
 
-answer = "Nada"
+answer = ""
 custom = False
 teams = []
 timesnochamp = 4
 nExiste = True
-names1y2 = [["Mandragor", "Céu", "Salgueiro", "Farrapo", "O Trazgo", "Bjørner", "Névoa", "Hipogrifo",
+names1y2 = [["Mandragor", "Céu", "Salgueiro", "Farrapo", "O Trazgo", "Bjørner", "Nevoeiro", "Hipogrifo",
              "Licantropo", "Fado", "Ricochete", "Relampago", "Gavião", "Mago", "Elfo", "Goblin"],
             ["Alado", "da Floresta", "Prateado", "Terrível", "de Merlin", "Negro", "Silencioso", "Ardente",
              "Poderoso", "Verde", "Esquecido", "de Ouro", "Azul", "Feroz", "Defensivo", "Rubro"]]
 
-print('<==========Campeonato de Quadribol!==========>')
-answer = input(('Você quer customizar o jogo escolhendo times e etc?\n'))
-
-if answer == "Sim" or answer == "sim" or answer == "aham" or answer == "Aham" or answer == "claro" or answer == "Claro":
-    custom = True
+custom = introQuadribol()
 
 if custom:
     timesnochamp = int(input(('Quantos times estarão em jogo? o máximo é 16.\n')))
@@ -56,7 +62,7 @@ chaves = int(timesnochamp / 2)
 print('\nA quantidade de times no jogo serão: {}.\nE a quantidade de chaves vai ser: {}.\n'
       .format(timesnochamp, chaves))
 
-teams = randomList(timesnochamp, teams)
+teams = randomList(timesnochamp)
 
 '''
 # Confere lista random
@@ -66,16 +72,17 @@ for i in range(timesnochamp):
 
 listaUm = []
 listaDois = []
-listaUm = randomList(timesnochamp, listaUm)
-listaDois = randomList(timesnochamp, listaDois)
+listaUm = randomList(timesnochamp)
+listaDois = randomList(timesnochamp)
 
+'''
 # Confere listaUm e listaDois
 # print(listaUm)
 # print(listaDois)
-print("\n")
+'''
 
 nomesTimes = []
-nomesTimes = randomList(timesnochamp, nomesTimes)
+nomesTimes = randomList(timesnochamp)
 
 for i in range(timesnochamp):
     nomesTimes[i] = names1y2[0][listaUm[i]-1] + ' ' + names1y2[1][listaDois[i]-1]
@@ -83,7 +90,11 @@ for i in range(timesnochamp):
 aux1 = 0
 aux2 = 1
 
+numeroChave = 1
+
 for i in range(chaves):
-    print('            /\'- {}\nChave x <=={{\n            \.- {}\n\n'.format(nomesTimes[aux1], nomesTimes[aux2]))
+    print('            /\'- {}\nChave {} <=={{\n            \.- {}\n\n'.format(nomesTimes[aux1], numeroChave,
+                                                                               nomesTimes[aux2]))
+    numeroChave += 1
     aux1 += 2
     aux2 += 2
