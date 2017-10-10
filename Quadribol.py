@@ -22,44 +22,52 @@ def introQuadribol():
     bResp = False
     print('<==========Campeonato de Quadribol!==========>')
     strResp = input('Você quer customizar o jogo escolhendo times e etc?\n')
-
-    if strResp == "Sim" or answer == "sim" or answer == "aham" or answer == "Aham" or answer == "claro" or answer == "Claro":
+    if strResp == "Sim" or strResp == "sim" or strResp == "aham" or strResp == "Aham" or strResp == "claro" or strResp == "Claro":
         bResp = True
-
     return bResp
+
+def chooseNumberOfTeams(custom):
+    timesnochamp = 0
+    if custom:
+        timesnochamp = int(input(('Quantos times estarão em jogo? o máximo é 16.\n')))
+        if timesnochamp > 16:
+            print("Desculpe, o número máximo de times é 16. Vamos seguir com 16.\n")
+            timesnochamp = 16
+        if timesnochamp < 2:
+            print("Desculpe, o número mínimo de times é 2. Vamos seguir com 2.\n")
+            timesnochamp = 2
+    else:
+        timesnochamp = 4
+    return timesnochamp
 
 """"
     TODO: elaborar resolução do campeonato
             ->transformar particulas em funções
-                ->corrigir bug no introQuadribol
 """
 
-answer = ""
+#Variáveis
 custom = False
 teams = []
 timesnochamp = 4
 nExiste = True
+restante = False
 names1y2 = [["Mandragor", "Céu", "Salgueiro", "Farrapo", "O Trazgo", "Bjørner", "Nevoeiro", "Hipogrifo",
              "Licantropo", "Fado", "Ricochete", "Relampago", "Gavião", "Mago", "Elfo", "Goblin"],
             ["Alado", "da Floresta", "Prateado", "Terrível", "de Merlin", "Negro", "Silencioso", "Ardente",
              "Poderoso", "Verde", "Esquecido", "de Ouro", "Azul", "Feroz", "Defensivo", "Rubro"]]
 
+
+
+
 custom = introQuadribol()
 
-if custom:
-    timesnochamp = int(input(('Quantos times estarão em jogo? o máximo é 16.\n')))
-    if timesnochamp > 16:
-        print("Desculpe, o número máximo de times é 16. Vamos seguir com 16.\n")
-        timesnochamp = 16
-    if timesnochamp < 2:
-        print("Desculpe, o número mínimo de times é 2. Vamos seguir com 2.\n")
-        timesnochamp = 2
-else:
-    timesnochamp = 4
+timesnochamp = chooseNumberOfTeams(custom)
 
+if False != (timesnochamp %2):
+    restante = True
 chaves = int(timesnochamp / 2)
 
-print('\nA quantidade de times no jogo serão: {}.\nE a quantidade de chaves vai ser: {}.\n'
+print('\nA quantidade de times no jogo serão: {}.\nE a quantidade de chaves vão ser: {}.\n'
       .format(timesnochamp, chaves))
 
 teams = randomList(timesnochamp)
@@ -92,9 +100,36 @@ aux2 = 1
 
 numeroChave = 1
 
+if  True != (timesnochamp % 2):
+    print('numero par de times\n')
+else:
+    print('numero impar de times\n')
+
+    print("um time sorteado irá para a próxima etapa automaticamente: ", nomesTimes[-2],'\n')
+
 for i in range(chaves):
-    print('            /\'- {}\nChave {} <=={{\n            \.- {}\n\n'.format(nomesTimes[aux1], numeroChave,
+    print('            /\'- {}\nChave {} <=={{\n            \.- {}\n'.format(nomesTimes[aux1], numeroChave,
                                                                                nomesTimes[aux2]))
     numeroChave += 1
+    vencedor = int(2 *random.random())
+    if(vencedor):
+        vencedor = nomesTimes[aux1]
+    else:
+        vencedor = nomesTimes[aux1]
     aux1 += 2
     aux2 += 2
+
+    print("O vencedor da rodada foi: " , vencedor, "\n\n")
+
+
+listTest = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+while(timesnochamp != 1):
+    restante = 0
+    print(timesnochamp)
+    if(True !=(timesnochamp %2)):
+        timesnochamp //= 2
+    else:
+        timesnochamp //= 2
+        restante = 1
+        timesnochamp +=restante
+
