@@ -1,5 +1,10 @@
 import random
 
+class Partida:
+    victory = 0
+    rodada = 0
+    blabla = ("1","2")
+    
 
 def randomList(sizeList):
     auxList = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
@@ -26,10 +31,17 @@ def introQuadribol():
         bResp = True
     return bResp
 
+def howToPontos():
+    bHowToPontos = False
+    strResp = input("Quer saber como o sistema de pontuação funciona?\n")
+    if strResp == "Sim" or strResp == "sim" or strResp == "aham" or strResp == "Aham" or strResp == "claro" or strResp == "Claro":
+        bHowToPontos = True
+    return bHowToPontos
+
 def chooseNumberOfTeams(custom):
     timesnochamp = 0
     if custom:
-        timesnochamp = int(input(('Quantos times estarão em jogo? o máximo é 16.\n')))
+        timesnochamp = int(input(('Quantos times estarão em jogo? O máximo é 16.\n')))
         if timesnochamp > 16:
             print("Desculpe, o número máximo de times é 16. Vamos seguir com 16.\n")
             timesnochamp = 16
@@ -44,8 +56,7 @@ def chooseNumberOfTeams(custom):
     TODO: elaborar resolução do campeonato
             ->transformar particulas em funções
 """
-
-#Variáveis
+'''Variáveis'''
 custom = False
 teams = []
 timesnochamp = 4
@@ -63,6 +74,13 @@ custom = introQuadribol()
 
 timesnochamp = chooseNumberOfTeams(custom)
 
+if custom:
+    howToPontos = howToPontos()
+    if howToPontos:
+        print('Muito bem! Para cada gol marcado por um dos jogadores serão somados 10 pontos ao placar.\n'
+              'Pegando o pomo de ouro são somados 30 pontos e o jogo é finalizado.')
+        input("\n\nAperte Enter para continuar...")
+
 if False != (timesnochamp %2):
     restante = True
 chaves = int(timesnochamp / 2)
@@ -72,22 +90,10 @@ print('\nA quantidade de times no jogo serão: {}.\nE a quantidade de chaves vã
 
 teams = randomList(timesnochamp)
 
-'''
-# Confere lista random
-for i in range(timesnochamp):
-    print(teams[i])
-'''
-
 listaUm = []
 listaDois = []
 listaUm = randomList(timesnochamp)
 listaDois = randomList(timesnochamp)
-
-'''
-# Confere listaUm e listaDois
-# print(listaUm)
-# print(listaDois)
-'''
 
 nomesTimes = []
 nomesTimes = randomList(timesnochamp)
